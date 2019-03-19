@@ -1,18 +1,49 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
-  </div>
+    <div class="page">
+        <MainList :list="list"></MainList>
+    </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import HelloWorld from '@/components/HelloWorld.vue'; // @ is an alias to /src
+    import {Component, Provide, Vue} from "vue-property-decorator";
 
-@Component({
-  components: {
-    HelloWorld,
-  },
-})
-export default class Home extends Vue {}
+    const MainList = () => import("@/components/MainList.vue");
+
+    @Component({
+        components: {
+            MainList,
+        },
+    })
+    export default class Home extends Vue {
+        @Provide() list: Array = [
+            {
+                name: "类型",
+                path: "/basetype",
+                icon: "fa-file-excel-o"
+            },
+            {
+                name:"声明变量",
+                path:"/variable",
+                icon:"fa-question-circle-o"
+            },
+            {
+                name:"接口",
+                path:"/interface",
+                icon:"fa-server"
+            },
+            {
+                name:"类（Class）",
+                path:"/interface",
+                icon:"fa-server"
+            }
+        ];
+    }
 </script>
+
+<style lang="scss" scoped>
+    .page {
+        padding: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+</style>
