@@ -2,8 +2,8 @@
     <ul class="list">
         <li v-for="(item,index) in list" :key="index">
             <router-link :to="item.path">
-                <i class="fa" :class="item.icon"></i>
-                <span>{{item.name}}</span>
+                <i class="fa" :class="item.meta.icon"></i>
+                <span>{{item.meta.title}}</span>
             </router-link>
         </li>
     </ul>
@@ -16,50 +16,60 @@
     @Component
     export default class Home extends Vue {
         //父组件参数
-        @Prop(Array) readonly list!: Array
+        @Prop(Array) readonly list!: Array;
 
-        mounted(){
+        mounted() {
             console.log(JSON.stringify(this.list));
         }
     }
 </script>
 
 <style lang="scss" scoped>
-    .list{
+    .list {
         display: flex;
-        li{
-            width: 310px;
-            height: 200px;
-            background: #ffffff;
-            margin: 0 20px 20px 20px;
+        flex-direction: column;
+        padding-top: 10px;
+
+        li {
+            width: 100%;
+            height: 60px;
             border-radius: 4px;
             transition: all .5s linear;
             cursor: pointer;
-            a{
-                display: flex;
-                width: 100%;
+            display: block;
+
+            a {
                 height: 100%;
-                flex-direction: column;
+                display: flex;
                 align-items: center;
-                justify-content: center;
-                box-shadow: 0 0 3px rgba(0,0,0,0.1);
-                i{
-                    color: royalblue;
-                    font-size: 60px;
+                padding-left: 30px;
+
+                i {
+                    color: #333;
+                    margin-right: 10px;
+                    font-size: 16px;
                 }
-                span{
-                    font-size: 20px;
-                    color: #333333;
-                    font-weight: bold;
-                    margin-top: 10px;
+
+                span {
+                    color: #333;
+                    font-size: 14px;
+                }
+
+                &.router-link-exact-active {
+                    i {
+                        color: mediumslateblue;
+                    }
+
+                    span {
+                        color: mediumslateblue;
+                    }
+
+                }
+                &:hover{
+                    background: rgba(0,0,0,0.3);
                 }
             }
-            &:hover{
-                transform: translateY(15px);
-                span{
-                    color: royalblue;
-                }
-            }
+
         }
     }
 </style>

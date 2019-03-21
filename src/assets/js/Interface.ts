@@ -64,18 +64,20 @@ const myStr: string = myArray[0];
 interface ClockInterface {
     currentTime: Date;
 
+    // @ts-ignore
     setTime(d: Date);
 }
 
 class Clock implements ClockInterface {
-    currentTime: Date;
-
-    setTime(d: Date) {
-        this.currentTime = d;
-    }
+    // @ts-ignore
+    private currentTime: Date | undefined;
 
     constructor(h: number, m: number) {
 
+    }
+
+    public setTime(d: Date) {
+        this.currentTime = d;
     }
 }
 
