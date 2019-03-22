@@ -6,7 +6,7 @@
 
 <script lang="ts">
     import {Component, Provide, Vue} from "vue-property-decorator";
-    import {response, Response} from "../assets/js/Enum";
+    import {response, Response} from '@/assets/js/Enum';
 
     @Component
     export default class Home extends Vue {
