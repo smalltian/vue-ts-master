@@ -4,72 +4,62 @@
  */
 
 const identity = (arg: number): number => {
-    return arg;
-};
-
+  return arg
+}
 
 /**
  * 泛型
  * @param arg 返回指定类型
  */
-const identityT = <T>(arg: T): T => {
-    return arg;
-};
+export const identityT = <T>(arg: T): T => {
+  return arg
+}
 
-/**
- * 泛型接口
- */
+/***==================泛型接口 start=============== */
+
+//范型类型作为对象变量参数
 interface GenericIdentityFn {
-    <T>(arg: T): T;
+  <T>(arg: T): T
+  <T>(obj: T): T
 }
 
-const identityFn = <T>(arg: T): T => {
-    return arg;
-};
+export const myIdentityT_2: GenericIdentityFn = identityT
 
-const myIdentityT_2: GenericIdentityFn = identityFn;
-
-/**
- * 范型类
- */
-class GenericNumber<T> {
-    public zeroValue: T | undefined;
-    public add: ((x: T, y: T) => T) | undefined;
+//将范型类型作为接口的一个参数
+interface THasParam<T> {
+  (arg: T): T
 }
 
-const myGN = new GenericNumber<number>();
-myGN.zeroValue = 0;
-myGN.add = (x, y) => {
-    return x + y;
-};
+export const tHasParam: THasParam<number> = identityT
+
+/**======================泛型接口 end =========================== */
+
+/**======================范型类 s =========================== */
+export class Generic<T> {
+  zeroValue: T | undefined
+  add: ((x: T, y: T) => T) | undefined
+}
+
+/**======================范型类 e =========================== */
 
 /**
  * 范型约束条件
  */
 interface Lengthwise {
-    length: number;
+  length: number
 }
 
 // 这个范型不再适用于任何类型
-const logging = <T extends Lengthwise>(arg: T): T => {
-    console.log('length约束: ' + arg.length);
-    return arg;
-};
+export const logging = <T extends Lengthwise>(arg: T): T => {
+  console.log('length约束: ' + arg.length)
+  return arg
+}
 
 /**
  * 范型和约束使用类型参数
  * @param obj
  * @param key
  */
-const getProperty = (obj: T, key: K) => {
-    return obj[key];
-};
-
-
-export {
-    identityT,
-    myIdentityT_2,
-    myGN,
-    logging,
-    getProperty,
-};
+export const getProperty = (obj: T, key: K) => {
+  return obj[key]
+}
